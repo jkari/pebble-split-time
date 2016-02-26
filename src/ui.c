@@ -20,6 +20,7 @@ static GBitmap *s_bitmap_moon_left = 0;
 static GBitmap *s_bitmap_moon_right = 0;
 static BitmapLayer *s_layer_bluetooth;
 static BitmapLayer *s_layer_weather;
+static GFont s_font_huge;
 static GFont s_font_big;
 static GFont s_font_small;
 static bool is_battery_animation_active = false;
@@ -52,7 +53,7 @@ static void _ui_reload_bitmap(GBitmap **image, uint32_t resource_id, GColor colo
 static void _ui_set_weather_icon() {
   int32_t resource_id = weather_get_resource_id(weather_get_condition());
   
-  _ui_reload_bitmap(&s_bitmap_weather, resource_id, config_get_color_right());
+  _ui_reload_bitmap(&s_bitmap_weather, resource_id, config_get_pointer_color_right());
   bitmap_layer_set_bitmap(s_layer_weather, s_bitmap_weather);
   
   layer_set_hidden((Layer *)s_layer_weather, false);
@@ -128,7 +129,7 @@ static void _draw_sun_cycle(GContext *ctx, GPoint offset, bool isLeft) {
 
 static void _draw_bg(GContext *ctx, GPoint offset, GRect area, bool isLeft) {
   GColor dotColor = isLeft ? config_get_color_right() : config_get_color_left();
-  GColor bgColor = isLeft ? config_get_color_left() : config_get_color_right();
+  GColor bgColor = isLeft ? config_get_pointer_color_left() : config_get_pointer_color_right();
   
   graphics_context_set_fill_color(ctx, bgColor);
   graphics_fill_rect(ctx, area, 0, GCornerNone);
@@ -149,11 +150,16 @@ static void _draw_hands(GContext *ctx, GPoint offset, bool isDark) {
   struct tm *tick_time = localtime(&temp);
   
   GColor handColor = isDark ? config_get_color_right() : config_get_color_left();
+  GColor pointerColor = isDark ? config_get_pointer_color_right() : config_get_pointer_color_left();
   
   int32_t minute_angle = TRIG_MAX_ANGLE * tick_time->tm_min / 60;
   GPoint minute_hand_end = {
     .x = (int16_t)(sin_lookup(minute_angle) * (int32_t)MINUTE_HAND_LENGTH / TRIG_MAX_RATIO) + offset.x,
     .y = (int16_t)(-cos_lookup(minute_angle) * (int32_t)MINUTE_HAND_LENGTH / TRIG_MAX_RATIO) + offset.y,
+  };
+  GPoint minute_pointer_end = {
+    .x = (int16_t)(sin_lookup(minute_angle) * (int32_t)MINUTE_POINTER_LENGTH / TRIG_MAX_RATIO) + minute_hand_end.x,
+    .y = (int16_t)(-cos_lookup(minute_angle) * (int32_t)MINUTE_POINTER_LENGTH / TRIG_MAX_RATIO) + minute_hand_end.y,
   };
   
   int32_t hour_angle = TRIG_MAX_ANGLE * ((tick_time->tm_hour % 12) / 12.f + tick_time->tm_min / (12.f * 60));
@@ -161,16 +167,30 @@ static void _draw_hands(GContext *ctx, GPoint offset, bool isDark) {
     .x = (int16_t)(sin_lookup(hour_angle) * (int32_t)HOUR_HAND_LENGTH / TRIG_MAX_RATIO) + offset.x,
     .y = (int16_t)(-cos_lookup(hour_angle) * (int32_t)HOUR_HAND_LENGTH / TRIG_MAX_RATIO) + offset.y,
   };
+  GPoint hour_pointer_end = {
+    .x = (int16_t)(sin_lookup(hour_angle) * (int32_t)HOUR_POINTER_LENGTH / TRIG_MAX_RATIO) + hour_hand_end.x,
+    .y = (int16_t)(-cos_lookup(hour_angle) * (int32_t)HOUR_POINTER_LENGTH / TRIG_MAX_RATIO) + hour_hand_end.y,
+  };
   
   // minute
-  graphics_context_set_stroke_width(ctx, 7);
+  graphics_context_set_stroke_width(ctx, 2);
   graphics_context_set_stroke_color(ctx, handColor);
   graphics_draw_line(ctx, offset, minute_hand_end);
   
+  // minute pointer
+  graphics_context_set_stroke_width(ctx, 3);
+  graphics_context_set_stroke_color(ctx, pointerColor);
+  graphics_draw_line(ctx, minute_hand_end, minute_pointer_end);
+  
   // hour
-  graphics_context_set_stroke_width(ctx, 7);
+  graphics_context_set_stroke_width(ctx, 2);
   graphics_context_set_stroke_color(ctx, handColor);
   graphics_draw_line(ctx, offset, hour_hand_end);
+  
+  // hour pointer
+  graphics_context_set_stroke_width(ctx, 3);
+  graphics_context_set_stroke_color(ctx, pointerColor);
+  graphics_draw_line(ctx, hour_hand_end, hour_pointer_end);
 }
 
 static void _layer_bg_left_update_callback(Layer *layer, GContext *ctx) {
@@ -242,27 +262,28 @@ void ui_load(Window *window) {
   GRect bounds = layer_get_bounds(window_layer);
   GPoint center = grect_center_point(&bounds);
 
-  s_font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_24));
-  s_font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_16));
+  s_font_huge = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_24));
+  s_font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_16));
+  s_font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_12));
   
   s_bitmap_bluetooth = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BLUETOOTH);
   
-  s_layer_day_of_month = text_layer_create(GRect(center.x - 44, center.y + DATE_OFFSET_Y, 40, 40));
+  s_layer_day_of_month = text_layer_create(GRect(20, center.y - 18, 40, 40));
   text_layer_set_background_color(s_layer_day_of_month, GColorClear);
   text_layer_set_font(s_layer_day_of_month, s_font_big);
-  text_layer_set_text_alignment(s_layer_day_of_month, GTextAlignmentRight);
+  text_layer_set_text_alignment(s_layer_day_of_month, GTextAlignmentLeft);
   
-  s_layer_weekday = text_layer_create(GRect(4, center.y + DATE_OFFSET_Y + 1, 40, 40));
+  s_layer_weekday = text_layer_create(GRect(20, center.y + 3, 40, 40));
   text_layer_set_background_color(s_layer_weekday, GColorClear);
-  text_layer_set_font(s_layer_weekday, s_font_small);
+  text_layer_set_font(s_layer_weekday, s_font_big);
   text_layer_set_text_alignment(s_layer_weekday, GTextAlignmentLeft);
 
-  s_layer_temperature = text_layer_create(GRect(4, center.y + WEATHER_OFFSET_Y, 40, 40));
+  s_layer_temperature = text_layer_create(GRect(center.x - 48, center.y - 18, 32, 32));
   text_layer_set_background_color(s_layer_temperature, GColorClear);
-  text_layer_set_text_alignment(s_layer_temperature, GTextAlignmentLeft);
+  text_layer_set_text_alignment(s_layer_temperature, GTextAlignmentCenter);
   text_layer_set_font(s_layer_temperature, s_font_big);
   
-  s_layer_weather = bitmap_layer_create(GRect(center.x - 34, center.y + WEATHER_OFFSET_Y - 3, 32, 32));
+  s_layer_weather = bitmap_layer_create(GRect(center.x - 46, center.y + 4 - 3, 32, 32));
   bitmap_layer_set_compositing_mode(s_layer_weather, GCompOpSet);
   bitmap_layer_set_bitmap(s_layer_weather, s_bitmap_weather);
   layer_set_hidden((Layer *)s_layer_weather, true);
@@ -289,9 +310,9 @@ void ui_load(Window *window) {
   layer_add_child(window_layer, s_layer_bg_left);
   layer_add_child(window_layer, s_layer_bg_right);
   
-  layer_add_child(s_layer_bg_left, text_layer_get_layer(s_layer_day_of_month));
+  layer_add_child(s_layer_bg_right, text_layer_get_layer(s_layer_day_of_month));
   layer_add_child(s_layer_bg_right, text_layer_get_layer(s_layer_weekday));
-  layer_add_child(s_layer_bg_right, text_layer_get_layer(s_layer_temperature));
+  layer_add_child(s_layer_bg_left, text_layer_get_layer(s_layer_temperature));
   
   layer_add_child(s_layer_bg_left, bitmap_layer_get_layer(s_layer_weather));
   layer_add_child(s_layer_bg_right, bitmap_layer_get_layer(s_layer_bluetooth));
@@ -334,9 +355,9 @@ void ui_update_time(void) {
 
 void ui_update_all(void) {
   
-  text_layer_set_text_color(s_layer_temperature, config_get_color_left());
+  text_layer_set_text_color(s_layer_temperature, config_get_pointer_color_right());
   text_layer_set_text_color(s_layer_weekday, config_get_color_left());
-  text_layer_set_text_color(s_layer_day_of_month, config_get_color_right());
+  text_layer_set_text_color(s_layer_day_of_month, config_get_color_left());
   
   ui_update_weather();
   

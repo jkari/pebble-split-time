@@ -20,4 +20,6 @@
 void config_received_callback(DictionaryIterator* iterator);
 GColor config_get_color_left();
 GColor config_get_color_right();
+GColor config_get_pointer_color_left();
+GColor config_get_pointer_color_right();
 bool config_get_use_celcius();

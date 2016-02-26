@@ -27,7 +27,7 @@ GColor config_get_color_left() {
     return GColorFromHEX(persist_read_int(PERSIST_KEY_COLOR_LEFT));
   }
   
-  return GColorPastelYellow;
+  return GColorFromRGBA(156,156,156,255);
 }
 
 GColor config_get_color_right() {
@@ -35,7 +35,16 @@ GColor config_get_color_right() {
     return GColorFromHEX(persist_read_int(PERSIST_KEY_COLOR_RIGHT));
   }
   
-  return GColorOxfordBlue;
+  return GColorFromRGBA(128,128,128,255);
+}
+
+GColor config_get_pointer_color_left() {
+  return GColorFromRGBA(255,255,255,255);
+  
+}
+
+GColor config_get_pointer_color_right() {
+  return GColorFromRGBA(0,0,0,255);  
 }
 
 bool config_get_use_celcius() {

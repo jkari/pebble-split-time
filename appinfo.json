@@ -56,8 +56,8 @@
             },
             {
                 "characterRegex": "[\\-\\+0-9A-Za-z ]",
-                "file": "fonts/Teko-Light.ttf",
-                "name": "FONT_CUSTOM_16",
+                "file": "fonts/Teko-Regular.ttf",
+                "name": "FONT_CUSTOM_20",
                 "targetPlatforms": null,
                 "type": "font"
             },

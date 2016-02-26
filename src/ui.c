@@ -268,7 +268,7 @@ void ui_load(Window *window) {
   s_font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_16));
   s_font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_12));
   s_font_pixel = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PIXEL_16));
-  s_font_custom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CUSTOM_16));
+  s_font_custom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CUSTOM_20));
   
   s_bitmap_bluetooth = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BLUETOOTH);
   

@@ -29,13 +29,6 @@
             {
                 "characterRegex": "[\\-\\+0-9A-Za-z ]",
                 "file": "fonts/BEBAS___.ttf",
-                "name": "FONT_MAIN_12",
-                "targetPlatforms": null,
-                "type": "font"
-            },
-            {
-                "characterRegex": "[\\-\\+0-9A-Za-z ]",
-                "file": "fonts/BEBAS___.ttf",
                 "name": "FONT_MAIN_24",
                 "targetPlatforms": null,
                 "type": "font"
@@ -44,6 +37,20 @@
                 "characterRegex": "[/\\+0-9A-Za-z ]",
                 "file": "fonts/BEBAS___.ttf",
                 "name": "FONT_MAIN_16",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[\\-\\+0-9A-Za-z ]",
+                "file": "fonts/BEBAS___.ttf",
+                "name": "FONT_MAIN_12",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[\\-\\+0-9A-Za-z ]",
+                "file": "fonts/PixelOperator.ttf",
+                "name": "FONT_PIXEL_16",
                 "targetPlatforms": null,
                 "type": "font"
             },

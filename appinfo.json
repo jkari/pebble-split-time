@@ -20,7 +20,7 @@
     "resources": {
         "media": [
             {
-                "file": "images/Screenshot",
+                "file": "images/screenshot.png",
                 "menuIcon": true,
                 "name": "IMAGE_SCREENSHOT",
                 "targetPlatforms": null,

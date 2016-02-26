@@ -24,6 +24,7 @@ static GFont s_font_huge;
 static GFont s_font_big;
 static GFont s_font_small;
 static GFont s_font_pixel;
+static GFont s_font_custom;
 static bool is_battery_animation_active = false;
 static int battery_animation_percent = 0;
 
@@ -267,23 +268,24 @@ void ui_load(Window *window) {
   s_font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_16));
   s_font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MAIN_12));
   s_font_pixel = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PIXEL_16));
+  s_font_custom = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CUSTOM_16));
   
   s_bitmap_bluetooth = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BLUETOOTH);
   
   s_layer_day_of_month = text_layer_create(GRect(20, center.y - 18, 40, 40));
   text_layer_set_background_color(s_layer_day_of_month, GColorClear);
-  text_layer_set_font(s_layer_day_of_month, s_font_pixel);
+  text_layer_set_font(s_layer_day_of_month, s_font_custom);
   text_layer_set_text_alignment(s_layer_day_of_month, GTextAlignmentLeft);
   
   s_layer_weekday = text_layer_create(GRect(20, center.y + 3, 40, 40));
   text_layer_set_background_color(s_layer_weekday, GColorClear);
-  text_layer_set_font(s_layer_weekday, s_font_pixel);
+  text_layer_set_font(s_layer_weekday, s_font_custom);
   text_layer_set_text_alignment(s_layer_weekday, GTextAlignmentLeft);
 
   s_layer_temperature = text_layer_create(GRect(center.x - 48, center.y - 18, 32, 32));
   text_layer_set_background_color(s_layer_temperature, GColorClear);
   text_layer_set_text_alignment(s_layer_temperature, GTextAlignmentCenter);
-  text_layer_set_font(s_layer_temperature, s_font_pixel);
+  text_layer_set_font(s_layer_temperature, s_font_custom);
   
   s_layer_weather = bitmap_layer_create(GRect(center.x - 46, center.y + 4 - 3, 32, 32));
   bitmap_layer_set_compositing_mode(s_layer_weather, GCompOpSet);

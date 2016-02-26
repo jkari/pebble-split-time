@@ -55,6 +55,13 @@
                 "type": "font"
             },
             {
+                "characterRegex": "[\\-\\+0-9A-Za-z ]",
+                "file": "fonts/Teko-Light.ttf",
+                "name": "FONT_CUSTOM_16",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
                 "file": "images/out_0.png",
                 "name": "IMAGE_CLOUDS",
                 "type": "png-trans"

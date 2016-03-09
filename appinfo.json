@@ -20,6 +20,37 @@
     "resources": {
         "media": [
             {
+                "file": "images/thunder-light.png",
+                "name": "IMAGE_THUNDER_LIGHT",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/thunder-heavy.png",
+                "name": "IMAGE_THUNDER_HEAVY",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/sun.png",
+                "name": "IMAGE_SUN",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/snow-shower.png",
+                "name": "IMAGE_SNOW_SHOWER",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/snow-light.png",
+                "name": "IMAGE_SNOW_LIGHT",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/snow-heavy.png",
+                "name": "IMAGE_SNOW_HEAVY",
+                "type": "bitmap"
+            },
+            {
                 "file": "images/screenshot.png",
                 "menuIcon": true,
                 "name": "IMAGE_SCREENSHOT",
@@ -27,9 +58,74 @@
                 "type": "bitmap"
             },
             {
+                "file": "images/rain-light.png",
+                "name": "IMAGE_RAIN_LIGHT",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/rain-heavy.png",
+                "name": "IMAGE_RAIN_HEAVY",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/out_0.png",
+                "name": "IMAGE_CLOUDS",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/moon.png",
+                "name": "IMAGE_MOON",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/mist.png",
+                "name": "IMAGE_MIST",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/clouds-medium.png",
+                "name": "IMAGE_CLOUDS_MEDIUM",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/clouds-light.png",
+                "name": "IMAGE_CLOUDS_LIGHT",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/clouds-heavy.png",
+                "name": "IMAGE_CLOUDS_HEAVY",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/clear.png",
+                "name": "IMAGE_CLEAR",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/bt.png",
+                "name": "IMAGE_BLUETOOTH",
+                "type": "bitmap"
+            },
+            {
+                "characterRegex": "[\\-\\+0-9A-Za-z ]",
+                "file": "fonts/Teko-Regular.ttf",
+                "name": "FONT_CUSTOM_20",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[\\-\\+0-9A-Za-z ]",
+                "file": "fonts/PixelOperator.ttf",
+                "name": "FONT_PIXEL_16",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
                 "characterRegex": "[\\-\\+0-9A-Za-z ]",
                 "file": "fonts/BEBAS___.ttf",
-                "name": "FONT_MAIN_24",
+                "name": "FONT_MAIN_12",
                 "targetPlatforms": null,
                 "type": "font"
             },
@@ -43,105 +139,9 @@
             {
                 "characterRegex": "[\\-\\+0-9A-Za-z ]",
                 "file": "fonts/BEBAS___.ttf",
-                "name": "FONT_MAIN_12",
+                "name": "FONT_MAIN_24",
                 "targetPlatforms": null,
                 "type": "font"
-            },
-            {
-                "characterRegex": "[\\-\\+0-9A-Za-z ]",
-                "file": "fonts/PixelOperator.ttf",
-                "name": "FONT_PIXEL_16",
-                "targetPlatforms": null,
-                "type": "font"
-            },
-            {
-                "characterRegex": "[\\-\\+0-9A-Za-z ]",
-                "file": "fonts/Teko-Regular.ttf",
-                "name": "FONT_CUSTOM_20",
-                "targetPlatforms": null,
-                "type": "font"
-            },
-            {
-                "file": "images/out_0.png",
-                "name": "IMAGE_CLOUDS",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/rain-light.png",
-                "name": "IMAGE_RAIN_LIGHT",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/rain-heavy.png",
-                "name": "IMAGE_RAIN_HEAVY",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/clear.png",
-                "name": "IMAGE_CLEAR",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/clouds-light.png",
-                "name": "IMAGE_CLOUDS_LIGHT",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/clouds-medium.png",
-                "name": "IMAGE_CLOUDS_MEDIUM",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/clouds-heavy.png",
-                "name": "IMAGE_CLOUDS_HEAVY",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/mist.png",
-                "name": "IMAGE_MIST",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/snow-heavy.png",
-                "name": "IMAGE_SNOW_HEAVY",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/bt.png",
-                "name": "IMAGE_BLUETOOTH",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/snow-light.png",
-                "name": "IMAGE_SNOW_LIGHT",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/snow-shower.png",
-                "name": "IMAGE_SNOW_SHOWER",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/thunder-heavy.png",
-                "name": "IMAGE_THUNDER_HEAVY",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/thunder-light.png",
-                "name": "IMAGE_THUNDER_LIGHT",
-                "type": "bitmap"
-            },
-            {
-                "file": "images/moon.png",
-                "name": "IMAGE_MOON",
-                "targetPlatforms": null,
-                "type": "bitmap"
-            },
-            {
-                "file": "images/sun.png",
-                "name": "IMAGE_SUN",
-                "targetPlatforms": null,
-                "type": "bitmap"
             }
         ]
     },

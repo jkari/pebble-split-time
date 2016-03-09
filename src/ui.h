@@ -23,6 +23,8 @@
 
 void ui_bluetooth_set_available(bool is_available);
 void ui_load(Window *window);
+void ui_show();
+void ui_hide();
 void ui_unload(void);
 void ui_update_all(void);
 void ui_update_time(void);

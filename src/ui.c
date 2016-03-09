@@ -389,3 +389,14 @@ void ui_update_weather() {
   _ui_set_temperature();
   _ui_set_weather_icon();
 }
+
+void ui_show() {  
+  Layer* layer_root = window_get_root_layer(layer_get_window(s_layer_bg_left));
+  layer_set_hidden(layer_root, false);
+  layer_mark_dirty(layer_root);
+}
+
+void ui_hide() {
+  Layer* layer_root = window_get_root_layer(layer_get_window(s_layer_bg_left));
+  layer_set_hidden(layer_root, true);
+}

@@ -30,6 +30,18 @@ static void bluetooth_handler(bool is_connected) {
   vibes_double_pulse();
 }
 
+static void _focusing_handler(bool in_focus) {
+  if (in_focus) {
+    ui_hide();
+  }
+}
+
+static void _focused_handler(bool in_focus) {
+  if (in_focus) {
+    ui_show();
+  }
+}
+
 static void main_window_load(Window *window) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Window load");
   
@@ -39,14 +51,20 @@ static void main_window_load(Window *window) {
 }
 
 static void main_window_unload(Window *window) {
-  APP_LOG(APP_LOG_LEVEL_INFO, "Window unload");
   ui_unload();
 }
 
-static void main_window_appear(Window *window) {
-  APP_LOG(APP_LOG_LEVEL_INFO, "Window appear");
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+static void handle_init(void) {
+  s_main_window = window_create();
   
+  window_set_window_handlers(s_main_window, (WindowHandlers) {
+    .load = main_window_load,
+    .unload = main_window_unload
+  });
+  
+  window_stack_push(s_main_window, true);
+  
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   battery_state_service_subscribe(battery_handler);
   
   ui_bluetooth_set_available(connection_service_peek_pebble_app_connection());
@@ -57,27 +75,11 @@ static void main_window_appear(Window *window) {
   ui_update_all();
 }
 
-static void main_window_disappear(Window *window) {
-  APP_LOG(APP_LOG_LEVEL_INFO, "Window disappear");
+static void handle_deinit(void) {  
   connection_service_unsubscribe();
   battery_state_service_unsubscribe();
   tick_timer_service_unsubscribe();
-}
 
-static void handle_init(void) {
-  s_main_window = window_create();
-  
-  window_set_window_handlers(s_main_window, (WindowHandlers) {
-    .load = main_window_load,
-    .unload = main_window_unload,
-    .appear = main_window_appear,
-    .disappear = main_window_disappear,
-  });
-  
-  window_stack_push(s_main_window, true);
-}
-
-static void handle_deinit(void) {
   window_destroy(s_main_window);
 }
 

@@ -15,7 +15,7 @@
     ],
     "companyName": "ooPixel",
     "enableMultiJS": false,
-    "longName": "Split Time Vertical",
+    "longName": "Split Time 2.0",
     "projectType": "native",
     "resources": {
         "media": [
@@ -146,7 +146,7 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "Split Time Vertical",
+    "shortName": "Split Time 2.0",
     "targetPlatforms": [
         "basalt",
         "chalk"
